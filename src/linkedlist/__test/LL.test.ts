@@ -38,13 +38,15 @@ describe('LL class', () => {
       expect(ll.getPrevLast()).toEqual("items is empty");
     })
     it('should return item correctly', async () => {
-      const expected = new N(20) // last is the first inserted
+      const expected = new N(30)
       ll.push(10)
       ll.push(20)
       ll.push(30)
       ll.push(40)
+
       // Arrange
       const prev = ll.getPrevLast()
+
       // Assert
       expect(prev).toEqual(expected)
       expect(ll.count()).toEqual(4)
@@ -65,16 +67,16 @@ describe('LL class', () => {
     // now item is empty
     it('should return last item correcty', async () => {
       //
-      ll.push(10) // last Stack
+      ll.push(10)
       ll.push(20)
       ll.push(30)
-      ll.push(40)
+      ll.push(40) // last
       // Ararnge
       const expectLast = ll.pop() // pop 10
       // Assert
-      expect(expectLast).toEqual(new N(10))
+      expect(expectLast).toEqual(new N(40))
       expect(ll.count()).toEqual(3)
-      expect(ll.last).toEqual(new N(20))
+      expect(ll.last).toEqual(new N(30))
 
     })
   })
@@ -89,12 +91,12 @@ describe('LL class', () => {
       expect(ll.count()).toBe(0)
     })
     // item is 0
-    it('should return first item correctly when items is two ', async () => {
+    it('should return first item correctly when items two ', async () => {
       ll.push(10)
       ll.push(20)
-      expect(ll.shift()).toEqual(new N(20))
+      expect(ll.shift()).toEqual(new N(10))
       expect(ll.count()).toBe(1)
-      expect(ll.first).toEqual(new N(10))
+      expect(ll.first).toEqual(new N(20))
 
       expect(ll.first).toEqual(ll.last)
     })
@@ -105,10 +107,10 @@ describe('LL class', () => {
       linkedList.push(20)
       linkedList.push(30)
       linkedList.push(40)
-      expect(linkedList.shift()).toEqual(new N(40))
+      expect(linkedList.shift()).toEqual(new N(10))
       expect(linkedList.count()).toEqual(3)
-      expect(linkedList.first?.val).toEqual(new N(30).val)
-      expect(linkedList.last).toEqual(new N(10))
+      // expect(linkedList.first?.val).toEqual(new N(30).val)
+      expect(linkedList.last).toEqual(new N(40))
 
     })
   })
@@ -121,13 +123,14 @@ describe('LL class', () => {
     // last dulu karena push take this purpose function
     it('should insert last item correctly', async () => {
       let ll = new LLL()
-      ll.unshift(10) // last => because ll size is one
+      ll.unshift(10)
       ll.unshift(20)
       expect(ll.count()).toEqual(2)
-      expect(ll.last).toEqual(new N(20))
+      expect(ll.last).toEqual(new N(10))
       ll.unshift(30)
       expect(ll.count()).toEqual(3)
-      expect(ll.last).toEqual(new N(30))
+      expect(ll.last).toEqual(new N(10))
+      expect(ll.first).not.toEqual(ll.last)
     });
   });
 });

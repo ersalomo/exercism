@@ -15,7 +15,7 @@ export default class LLL<T>{
   private size:number = 0
   public first?:N<T> | null
   public last?:N<T> | null
-  constructor(){
+  constructor() {
     this.first = null
     this.last = null
   }
@@ -24,8 +24,8 @@ export default class LLL<T>{
     if(this.isEmpty()){
       this.first = this.last = node
     }else{
-      node.next = this.first as N<T>
-      this.first = node
+      this.last!!.next = node
+      this.last = node
     }
     this.size++
   }
@@ -63,15 +63,13 @@ export default class LLL<T>{
     this.size--
     return first
   }
-  unshift(val:T) { // insert first
-    // insert last because push take this purpose's function
+  unshift(val:T) {
     const node = new N(val)
     if(this.isEmpty()) {
       this.first = this.last = node
     }else{
-      // new node must be last val
-      this.last!!.next = node
-      this.last = node
+      node.next = this.first as N<T>
+      this.first = node
     }
     this.size++
   }
@@ -119,13 +117,5 @@ export default class LLL<T>{
     }
     return prev as N<T>
   }
-
 }
 
-// const l = new LLL()
-// l.push(10)
-// l.push(20)
-// l.push(30)
-// l.push(40)
-// const prev = l.getPrevLast()
-// console.log(prev, l)
