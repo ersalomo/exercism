@@ -6,7 +6,7 @@ export class N<T> {
     this.n = null
   }
   set val(val: T) { this.value = val }
-  get val() { return this.value }
+  get val():T { return this.value }
 
   set next(val: N<T> | null) { this.n = val}
   get next() { return this.n as N<T> }
@@ -38,7 +38,7 @@ export default class LLL<T>{
       current = current.next
     }
   }
-  pop(): unknown {
+  pop(): T | boolean | undefined   {
     if(this.isEmpty()) return false;
     let lastItem = null
     if(this.count() == 1) {
@@ -49,19 +49,18 @@ export default class LLL<T>{
       this.last = this.getPrevLast() as N<T>
     }
     this.size--
-    return lastItem
+    return lastItem?.val
   }
   shift() {  // like pop but it takes the first item and remove it from items
     if(this.isEmpty()) return false
-    let first = this.first
+    let val = this.first?.val
     if(this.first == this.last) { // means item is 1
       this.first = this.last = null
     }else{
       this.first = this.first?.next
-      first!.next = null
     }
     this.size--
-    return first
+    return val
   }
   unshift(val:T) {
     const node = new N(val)
