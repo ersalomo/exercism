@@ -82,7 +82,7 @@ export default class LLL<T>{
       this.first = this.first.next
       isF = true
     }else{
-      let current = this.first,
+      let current = this.first?.next,
           prev = current;
 
       while (current != null) {
